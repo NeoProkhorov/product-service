@@ -1,0 +1,35 @@
+version: '3.8'
+services:
+  product-service-db:
+    image: postgres:16.3-alpine
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: product-service
+    ports:
+      - "7432:5432"
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U postgres -d product-service" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+    restart: unless-stopped
+    networks:
+      - tarificator-network
+
+  product-backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "18003:18003"
+    depends_on:
+      - product-service-db
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://product-service-db/product-service
+    networks:
+      - tarificator-network
+networks:
+  tarificator-network:
+    external: true
