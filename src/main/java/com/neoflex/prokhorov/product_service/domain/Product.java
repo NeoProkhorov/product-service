@@ -11,6 +11,7 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.FieldDefaults;
 import org.hibernate.envers.Audited;
+import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.AbstractPersistable;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -41,6 +42,9 @@ public class Product extends AbstractPersistable<UUID> {
     int version;
     @LastModifiedDate
     Instant lastModifiedInstant;
+    @LastModifiedBy
+    Long accountId;
+
 
     public int updateVersion() {
         return ++ this.version;

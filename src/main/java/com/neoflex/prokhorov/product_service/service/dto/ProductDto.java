@@ -26,4 +26,5 @@ public class ProductDto {
     UUID tariffId;
     int version;
     Instant lastModifiedInstant;
+    Long accountId;
 }

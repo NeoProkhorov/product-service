@@ -3,20 +3,19 @@ package com.neoflex.prokhorov.product_service.web;
 import com.neoflex.prokhorov.product_service.service.ProductService;
 import com.neoflex.prokhorov.product_service.service.dto.ProductDto;
 import lombok.AccessLevel;
+import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.Instant;
-import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
 
 @RestController
 @RequestMapping("/products")
-@FieldDefaults(level = AccessLevel.PRIVATE)
+@FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
+@RequiredArgsConstructor
 public class ProductController {
-    @Autowired
     ProductService service;
 
     @GetMapping

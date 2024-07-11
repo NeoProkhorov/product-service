@@ -7,8 +7,8 @@ import com.neoflex.prokhorov.product_service.service.mapper.ProductMapper;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.validation.ConstraintViolationException;
 import lombok.AccessLevel;
+import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.Instant;
@@ -17,11 +17,10 @@ import java.util.List;
 import java.util.UUID;
 
 @Service
-@FieldDefaults(level = AccessLevel.PRIVATE)
+@FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
+@RequiredArgsConstructor
 public class ProductService {
-    @Autowired
     ProductRepository repository;
-    @Autowired
     ProductMapper mapper;
 
     static final String ENTITY_NOT_FOUND_EXCEPTION = "Не найден продукт с id %s";
